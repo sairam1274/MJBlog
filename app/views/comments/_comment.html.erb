@@ -1,0 +1,25 @@
+
+
+<ul id="flits_list">
+  <li>
+     <%= image_tag comment.user.photo.url(:small) %>
+     <div class="flit_message_container">
+      
+        <%= link_to  comment.user.username %> <br />
+        <%=  comment.comment %><br />
+        <div class="time_ago">
+          <%= distance_of_time_in_words_to_now(comment.created_at) %>ago
+        </div>
+
+<!--        <%= check_destroy_comment_authority(comment) %>
+ -->                <!--     <%= link_to 'Destroy', flit_comment_path(@flit, comment),
+            :confirm => 'Are you sure?', :method => :delete %> -->
+        <% if comment.user_id == current_user.id %>
+           <%= link_to 'Delete', [comment.flit, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+        <% end %>
+     </div>
+     <div class="clear"></div>
+  </li>
+</ul>

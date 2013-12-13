@@ -1,0 +1,98 @@
+
+
+<%= form_tag search_path do %>
+<div id ="search_bar">
+ <%= text_field_tag :q, @q, :class => "text", :placeholder => "Search " %>
+<!--  <div id="search_submit_button" onclick="">&nbsp;</div> -->
+</div>
+<% end %><br />
+
+<table style="border-radius:10px;background-color:  #C0C0C0;" height="100" width="330" cellpadding="10">
+  <tr>
+    <td class="ok">
+      <%= link_to image_tag(current_user.photo.url(:small), :border => "2", :width=>90, :height=>80), user_flits_path(current_user.username) %>
+    </td>
+    <td colspan="2">
+        <%= link_to current_user.username.capitalize, user_flits_path(current_user.username), :style => "font-size:20px;color:black;" %><br />
+        <%= link_to 'Edit Profile'.html_safe, edit_user_path(current_user.username), :style => "color: #483C32;" %>
+    </td>
+  </tr>
+  <tr>
+    <td class="ok">
+       <div id="side_content_container">
+         <h4>
+            <%= link_to pluralize(current_user.flits.length, "Messages"),  user_flits_path(current_user.username)  %>
+         </h4>
+       </div>
+    </td>
+    <td class="ok"> 
+      <div id="side_content_container">
+         <h4>
+            <%= link_to "#{current_user.friends.count} Following" , following_path  %>
+         </h4>
+      </div>
+    </td>
+    <td class="ok"> 
+      <div id="side_content_container"> 
+        <h4>
+          <%=link_to  pluralize(current_user.friends_of.count, "Follower"), following_path %>
+        </h4>
+      </div>
+    </td>
+  </tr>
+</table>
+<div class="clear"></div>
+<br />
+
+
+
+<div  style="border-radius:10px;background-color:  #C0C0C0;" height="700" width="330" cellpadding="10">&nbsp;
+  <h4 align="center">Who To Follow</h4>
+  <% current_user.friends_of.each do |friend| %>
+
+  <%= link_to image_tag(friend.photo.url(:small), :width=>60, :height=>60, :border =>12 , :style => "margin:auto 0px 8px 2px;"  , :alt => friend.username, :title => friend.username), user_flits_path(friend.username) %>
+  <% end %>
+</div>
+ <div id="element_to_pop_up">
+<div class="b-close">x</div>
+</div>
+        <div id="my-button1">
+                Click me!
+        </div>
+<div class="clear"></div/>
+   <style type="text/css">
+    #element_to_pop_up { 
+    background-color:red;
+    border-radius:10px;
+    color:green;
+    display:none; 
+    padding:10px;
+    min-width:100px;
+    min-height: 100px;
+}
+
+
+
+</style>
+<script type="text/javascript">
+    // Semicolon (;) to ensure closing of earlier scripting
+      // Encapsulation
+      // $ is assigned to jQuery
+      ;(function($) {
+           // DOM Ready
+          $(function() {
+              // Binding a click event
+              // From jQuery v.1.7.0 use .on() instead of .bind()
+              $('#my-button1').bind('click', function(e) {
+                  e.preventDefault();
+                   $('#element_to_pop_up').bPopup({
+                 speed: 450,
+                 transition: 'slideDown',
+ loadUrl:'http://www.fotoshows.com.ar/www/zidanerestobar.com.ar/images/test_flyer.jpg',
+                         content:'image',
+            contentContainer:'#element_to_pop_up',
+                 });
+              });
+          });
+      })(jQuery);
+      </script>

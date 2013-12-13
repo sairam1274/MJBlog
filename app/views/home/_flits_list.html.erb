@@ -1,0 +1,121 @@
+
+
+
+<ul id="flits_list">
+	<% @flits.each do |flit| %>
+	 <li<%if @flits.first == flit %> class="first" <%end%>>
+    
+      <%= link_to image_tag(flit.user.photo.url(:small), :border => 0, :width=>60, :height=>60), user_flits_path(flit.user.username) %>
+
+       <!--Messages-->
+
+
+        <div class="flit_message_container">
+         <%= link_to flit.user.username, user_flits_path(flit.user.username), :style => "font-size:16px;color:black;" %>
+         	<font size="2"><%= h flit.message %></font>
+         
+
+          <div class="time_ago">
+            <%= distance_of_time_in_words_to_now(flit.created_at)  %>ago
+          </div>
+    
+
+    <!-- photo -->       
+        <% if flit.photo1_file_name.nil? %>
+        
+        <% else %>
+          <%= image_tag flit.photo1.url(:small) %>
+        <% end %>
+
+
+    <!-- audio -->
+        <% if flit.audio_file_name.nil? %>
+
+        <% else %> 
+            <%= link_to 'Play', flit.audio.url %>
+        <% end %>
+            <br />
+            
+    <!--     Video: -->
+         
+           <% if flit.video_file_name.nil? %>
+            <% else %> 
+               <%= link_to 'Play', flit.video.url %>
+
+           <% end %>
+            <br />
+
+          <%= toggle_like_button(flit,@current_user) %>&nbsp;
+          
+          <% if current_user.id == flit.user_id %>
+                <%= link_to "Destroy" ,  flit , :method => :delete %>&nbsp;
+          <% end %>
+
+          <%= link_to "Comment", flit, :method => :GET %>&nbsp;
+               
+         
+        </div>
+         <div class="clear"></div>
+   	 </li>
+	<% end %>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- comment code -->
+
+
+
+
+    <!--   
+
+  <div id="addcomment">
+     <a href='#' id="addcomment" class="addcomment" >comment</a>
+  </div>
+  <div id='postComment' class='postComment'>
+     <textarea name='comment' id='comment' class='comment' ></textarea>
+     <input type='submit' value='Post' />
+  </div>
+</div>
+
+
+<style type="text/css">
+#postComment
+   {
+     display:none;
+    }
+#comment
+ {
+   width: 446px;
+   height: 54px;
+  }
+
+</style>
+
+<script type="text/javascript">
+$("#addcomment").click(function () {
+$("#postComment").show("fast");
+});
+
+
+</script> -->

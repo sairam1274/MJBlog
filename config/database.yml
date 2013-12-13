@@ -1,0 +1,17 @@
+
+
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: mjblog_developement
+  username: postgres
+  password: maheshwari
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: mjblog_test
+  username: postgres
+  password: maheshwari
+  host: localhost

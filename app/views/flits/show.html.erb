@@ -1,0 +1,121 @@
+        
+
+<ul id="flits_list">
+  <li>
+    <%= link_to image_tag(@flit.user.photo.url(:small), :border => 0, :width=>80, :height=>80),         user_flits_path(@flit.user.username) %>
+    <div class="flit_message_container">
+       <%= link_to @flit.user.username, user_flits_path(@flit.user.username) %> <br />
+       <%= @flit.message %><br />
+      <div class="time_ago">
+         <%= distance_of_time_in_words_to_now(@flit.created_at) %>ago<br />
+      </div>
+
+    </div>
+     
+    <div class="clear"></div>
+  </li>
+</ul>
+
+<!-- photo -->       
+        <% if @flit.photo1_file_name.nil? %>
+        <% else %>
+              <%=link_to image_tag(@flit.photo1.url(:small), :width => "300", :height => "200", :align => "center" ) %><br />
+        <% end %>
+    <!-- audio -->
+        <% if @flit.audio_file_name.nil? %>
+        <% else %> 
+            <%= link_to "Play", @flit.audio.url%><br />
+        <% end %>                    
+    <!--     Video: -->
+        <% if @flit.video_file_name.nil? %>
+        <% else %> 
+          <%= link_to'video', @flit.video.url %><br />
+        <% end %>
+</p>
+
+<!-- comment code -->
+<div class="row">
+  <div class="comments span8">
+    <font size="5">Comments</font>
+
+    <%= render @flit.comments %>
+
+    <%= render 'comments/form' %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div id="show1" class="PopUpSample" style="width:50%; display:none">
+
+<p style="text-align:left;padding-left:40px;">
+
+Demo PopUp
+</p>
+
+<p><input type="button" id="btnClose" value="Close" /></p>
+
+</div>
+
+<div style="width:50%;"> <input type="button" id="lbtClickHere" value="TestPopUpDiv" /> </div>
+
+
+
+
+<style type="text/css">
+.PopUpSample {
+position:fixed;
+_position:absolute;
+height:300px;
+width:600px;
+background:#FFFFFF;
+left: 300px;
+top: 150px;
+z-index:100;
+margin-left: 15px;
+border:2px solid #ff0000;
+padding:15px;
+font-size:15px;
+-moz-box-shadow: 0 0 5px #ff0000;
+-webkit-box-shadow: 0 0 5px #ff0000;}
+</style>
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+$("#lbtClickHere").click(function () {
+$("#show1").show();
+});
+$("#btnClose").click(function () {
+$("#show1").hide();
+});
+});
+</script>
+
+
+ -->

@@ -1,0 +1,56 @@
+<script type="text/javascript">
+$(function(){
+$('#flit_message').keyup(function(){
+var content_length = $(this).val().length;
+var remaining = 140 - content_length
+$("#char_count").html(remaining);
+
+if(remaining < 21 && remaining > 9){
+  $("#char_count").addClass("dark-red");
+  $("#char_count").removeClass("red");
+
+  }
+else if (remaining <= 9 ) {
+  alert("exceed the limit of message");
+  $("#char_count").addClass("dark-red");
+  $("#char_count").removeClass("red");
+  }
+else{
+  $("#char_count").addClass("dark-red").removeClass("red");
+}
+
+})
+})
+</script>
+<style type="text/css">
+.photo1
+{
+
+  }
+  </style>
+
+<%= form_for Flit.new do |f|%>
+  <div id="new_flit_form">
+    <h3 style="float:left; color:black;">What are you doing?</h3>
+    <h3 id="char_count">140</h3>
+    <%= f.text_area :message %>
+    <%= f.file_field :photo1 %>
+    <!--  <%= f.file_field :audio %>
+    <%= f.file_field :video %> -->
+
+   
+
+      
+      <div id="submit_button_container">
+         <%= f.submit "Post"  %>
+      </div>
+      <div class="clear"></div>
+  </div>
+<% end %>
+
+<%= render :partial => "flits_list", :locals => { :flits => @flits } %> 
+<script type="text/javascript">
+
+
+</script>
+
